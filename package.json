@@ -1,0 +1,19 @@
+{
+  "name": "coding-problems",
+  "version": "1.0.0",
+  "description": "",
+  "main": "runall.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Avoxel284/somechallenges.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Avoxel284/somechallenges/issues"
+  },
+  "homepage": "https://github.com/Avoxel284/somechallenges#readme"
+}
