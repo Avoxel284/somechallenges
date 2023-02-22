@@ -19,6 +19,7 @@ const letterToIndex = (l) => l.toUpperCase().charCodeAt(0) - 64;
 
 /**
  * Encrypts a given string by using a given key and ciphering it using the Vigenere table.
+ * 
  * Note: the string and key will be converted to upper case.
  * Symbols including spaces, exclamation marks and full stops are allowed but won't be ciphered.
  *
@@ -38,22 +39,22 @@ function encrypt(str, key) {
 	else key = key.repeat(Math.ceil(str.length / key.length) + 1).substring(0, str.length);
 
 	// Make sure our str and key is valid
-	if (!str.match(/^([A-Z]|\s|\.|!){1,}$/))
+	if (!str.match(/^([A-Z]|\s|\.|!){1,}$/g))
 		throw "Str can only include characters from A-Z, spaces, exclamation marks and fullstops";
-	if (!key.match(/^[A-Z]{1,}$/)) throw "Key can only include characters from A-Z";
+	if (!key.match(/^[A-Z]{1,}$/g)) throw "Key can only include characters from A-Z";
 	console.log(`Ciphering: ${str} (${str.length}) with key: ${key} (${key.length})`);
 
 	// Iterate through the str
 	for (i = 0; i < str.length; i++) {
 		// If the character is a letter, cipher it
-		if (str[i].match(/^[A-Z]$/)) {
+		if (str[i].match(/^[A-Z]$/g)) {
 			// Repeat the alphabet array so it "wraps around"
 			// Then, get the sum of indexes of str[i] and key[i], but subtract 2 so it shifts (also compensating for 0-based indexing)
 			// Finally, append it to the result
 			result += [...alphabet, ...alphabet][letterToIndex(str[i]) + letterToIndex(key[i]) - 2];
 		}
 		// If the character is a symbol, don't cipher it
-		else if (str[i].match(/^\s|\.|!$/)) result += str[i];
+		else if (str[i].match(/^\s|\.|!$/g)) result += str[i];
 	}
 
 	return result;
