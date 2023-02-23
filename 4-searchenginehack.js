@@ -6,25 +6,34 @@
 
 /** The length of the output words */
 const wordLength = 5;
+/** An array of pithy, one-liner sayings */
+const sayings = require("fs")
+	.readFileSync(__dirname + "/sayings.txt")
+	.toString()
+	.split("\n");
 
 /**
  * Reverse searches an array of sayings and finds common "words" between them. Returns an object containing common words and their count values.
  *
  * The length of these words is hardcoded in a variable above.
- * The current method of searching these words is by iterating through each saying, splitting all wordLength-long words words from the saying
- * and dumping it in an array. Then, while iterating through these sayings it will check if the word has already been found.
+ * The current method of searching these words is by iterating through each saying, flattening them in to a long string, splitting all wordLength-long
+ * words words from the saying and dumping it in an array. Then, while iterating through these sayings it will check if the word has already been found.
+ * If so, the word is added to the commonWords array.
  *
  * @param {Array} sayings An array of sayings to search for common words
  */
 function reverseSearch(sayings) {
 	let words = [];
 	let commonWords = {};
+	if (!Array.isArray(sayings) || !sayings?.length > 0)
+		throw "Given sayings array isn't valid (empty or not an array)";
 
 	sayings.forEach((s) => {
-		// Extract "words" from sayings
+		// "Flatten" the saying into a lower case string with no spaces
 		s = s.toLowerCase().replace(/[^A-Z]/gi, "");
 		// console.log(s);
 
+		// Extract "words" from sayings
 		for (let i = 0; i < s.length; i++) {
 			if (i > s.length - wordLength) continue;
 			w = s.substring(i, i + wordLength);
@@ -41,14 +50,14 @@ function reverseSearch(sayings) {
 }
 
 // Run the function, then sort it from highest count to lowest
-const results = Object.entries(
-	reverseSearch(
-		require("fs")
-			.readFileSync(__dirname + "/sayings.txt")
-			.toString()
-			.split("\n")
-	)
-).sort((a, b) => b[1] - a[1]);
+const results = Object.entries(reverseSearch(sayings)).sort((a, b) => b[1] - a[1]);
 
-console.log(`Found ${results.length} common words in given sayings! Top 10:`)
-console.log(results.splice(0, 10).map(v=>`"${v[0]}" with ${v[1]}, `).join(""));
+console.log(
+	`Found ${results.length} common words (length: ${wordLength}) in ${sayings.length} given sayings! Top 10 common words with their count:`
+);
+console.log(
+	results
+		.splice(0, 10)
+		.map((v, i) => `"${v[0]}" with ${v[1]}${i < 9 ? ", " : ""}`) // damn look at that attention to detail
+		.join("")
+);

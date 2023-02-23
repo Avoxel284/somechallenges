@@ -5,13 +5,17 @@
  * 2023 Oliver B (Avoxel284)
  */
 
-let k = [];
+let k = [],
+	f = true;
 require("fs")
 	.readFileSync(__dirname + "/sayings.txt")
 	.toString()
 	.split("\n")
 	.forEach((v) => {
-		if (v.match(/^[A-Z,a-z,\s,\.]{1,}$/)) k.push(v);
+		if (v.match(/^[A-Z,a-z,\s,\.]{1,}$/)) {
+			if (f) k.push(v.toLowerCase().replace(/[^A-Z]/gi, ""));
+			else k.push(v);
+		}
 	});
 
-require("fs").writeFileSync(__dirname + "/sayings.txt", k.join("\n"));
+require("fs").writeFileSync(__dirname + "/sayings-f.txt", k.join("\n"));
