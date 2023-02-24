@@ -4,6 +4,8 @@
  * 2023 Oliver B (Avoxel284)
  */
 
+const inquirer = require("inquirer");
+
 /**
  * An array of uppercase letters from A-Z, procedurally generated
  */
@@ -19,7 +21,7 @@ const letterToIndex = (l) => l.toUpperCase().charCodeAt(0) - 64;
 
 /**
  * Encrypts a given string by using a given key and ciphering it using the Vigenere table.
- * 
+ *
  * Note: the string and key will be converted to upper case.
  * Symbols including spaces, exclamation marks and full stops are allowed but won't be ciphered.
  *
@@ -76,9 +78,8 @@ function decrypt(str, key) {
 	else key = key.repeat(Math.ceil(str.length / key.length) + 1).substring(0, str.length);
 
 	// Make sure our str and key is valid...
-	if (!str.match(/^([A-Z]|\s|\.|!){1,}$/))
-		throw "Str can only include characters from A-Z, spaces, exclamation marks and fullstops";
-	if (!key.match(/^[A-Z]{1,}$/)) throw "Key can only include characters from A-Z";
+	
+
 	console.log(`Deciphering: ${str} (${str.length}) with key: ${key} (${key.length})`);
 
 	// Iterate through the str
@@ -97,5 +98,47 @@ function decrypt(str, key) {
 	return result;
 }
 
-console.log(encrypt("Hello World!", "dfw"));
-console.log(decrypt("KJHOT ZTNOI!", "dfw"));
+function validateStrings(str,key){
+	return new Promise((res, rej) => {
+		if (!str.match(/^([A-Z]|\s|\.|!){1,}$/))
+rej("Str can only include characters from A-Z, spaces, exclamation marks and fullstops");
+		if (!key.match(/^[A-Z]{1,}$/)) rej( "Key can only include characters from A-Z");
+		
+	}
+}
+
+let result;
+let key;
+inquirer
+	.prompt([
+		{
+			name: "cipherInput",
+			message: "Input a message to cipher",
+			type: "input",
+			validate: (input) => {
+				return new Promise((res, rej) => {
+					if (input?.length == 0) return rej(`Please input a valid message`);
+					res();
+				});
+			},
+		},
+		{
+			name: "keyInput",
+			message: "Input a key to use",
+			type: "input",
+			validate: (input) => {
+				return new Promise((res, rej) => {
+					if (input?.length == 0) return rej(`Please input a valid key`);
+					res();
+				});
+			},
+		},
+	])
+	.then((v) => {
+		result = encrypt(v.cipherInput, v.keyInput);
+		key = v.keyInput;
+		console.log(`Ciphered result: ${result}`);
+	});
+
+// console.log(encrypt("Hello World!", "dfw"));
+// console.log(decrypt("KJHOT ZTNOI!", "dfw"));

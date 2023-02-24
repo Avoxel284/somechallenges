@@ -21,19 +21,22 @@ function findCoconuts(sailors) {
 	let x = 0;
 
 	while (x % sailors == 0) {
-		console.log(`iterationio numero ${coconuts}`);
+		// console.log(`iterationio numero -- nuts : ${coconuts}`);
+		let x = coconuts;
 		for (let sailor = 1; sailor <= sailors; sailor++) {
-			let x = coconuts;
 			x -= 1 + x / sailors;
-
+			console.log(x);
 			// console.log(coconuts % sailors);
+			// if (coconuts )
 			if (x % sailors != 1) coconuts++;
-			else if (x != 0 && x % sailors == 0) coconuts++;
+			// else if (x != 0 && x % sailors == 0) coconuts++;
 
-			console.log(`coconuts after sailor #${sailor}: ${coconuts} | ${coconuts % sailors != 1}`);
+			// console.log(`coconuts after sailor #${sailor}: ${coconuts} | ${coconuts % sailors != 1}`);
 		}
 		// coconuts++;
 		// console.log(coconuts);
+		// if (coconuts==0) coconuts++;
+		// if (!(coconuts != 0 && coconuts % sailors == 0)) coconuts++;
 	}
 
 	return coconuts;

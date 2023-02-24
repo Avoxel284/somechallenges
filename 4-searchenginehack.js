@@ -57,7 +57,8 @@ console.log(
 );
 console.log(
 	results
-		.splice(0, 10)
+		// .splice(0, 10)
 		.map((v, i) => `"${v[0]}" with ${v[1]}${i < 9 ? ", " : ""}`) // damn look at that attention to detail
 		.join("")
 );
+

@@ -1,5 +1,18 @@
 #include <iostream>
 
+// coconuts++ until coconuts != 0, 
+//                  coconuts % sailors != 0 &&
+//                  coconuts % sailors == 1
+
+// if coconuts % sailors == 1
+// then coconuts ++
+
+// if !(nuts != 0 && nuts % n == 0)
+// then coconuts ++
+
+
+
+
 bool valid(int n, int nuts) {
     for (int k = n; k != 0; k--, nuts -= 1 + nuts / n) {
         if (nuts % n != 1) {
