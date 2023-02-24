@@ -40,12 +40,6 @@ function encrypt(str, key) {
 	// Just to be safe, we'll add an extra repeat (shouldn't need it though)
 	else key = key.repeat(Math.ceil(str.length / key.length) + 1).substring(0, str.length);
 
-	// Make sure our str and key is valid
-	if (!str.match(/^([A-Z]|\s|\.|!){1,}$/g))
-		throw "Str can only include characters from A-Z, spaces, exclamation marks and fullstops";
-	if (!key.match(/^[A-Z]{1,}$/g)) throw "Key can only include characters from A-Z";
-	console.log(`Ciphering: ${str} (${str.length}) with key: ${key} (${key.length})`);
-
 	// Iterate through the str
 	for (i = 0; i < str.length; i++) {
 		// If the character is a letter, cipher it
@@ -77,9 +71,6 @@ function decrypt(str, key) {
 	if (str.length <= key.length) key = key.trim().substring(0, str.length);
 	else key = key.repeat(Math.ceil(str.length / key.length) + 1).substring(0, str.length);
 
-	// Make sure our str and key is valid...
-	
-
 	console.log(`Deciphering: ${str} (${str.length}) with key: ${key} (${key.length})`);
 
 	// Iterate through the str
@@ -98,46 +89,76 @@ function decrypt(str, key) {
 	return result;
 }
 
-function validateStrings(str,key){
+function validateStrings(str, key) {
 	return new Promise((res, rej) => {
-		if (!str.match(/^([A-Z]|\s|\.|!){1,}$/))
-rej("Str can only include characters from A-Z, spaces, exclamation marks and fullstops");
-		if (!key.match(/^[A-Z]{1,}$/)) rej( "Key can only include characters from A-Z");
-		
-	}
+		// Make sure our str and key is valid...
+		if ((str != null && str.length == 0) || (key != null && key.length == 0)) rej("Invalid input");
+		if (str != null && !str.match(/^([A-Z]|\s|\.|!){1,}$/gi))
+			rej(
+				"Message to cipher can only include characters from A-Z, spaces, exclamation marks and fullstops."
+			);
+		if (key != null && !key.match(/^[A-Z]{1,}$/gi))
+			rej("Key can only include characters from A-Z.");
+		res(true);
+	});
 }
 
-let result;
-let key;
+console.log(`Welcome to my amazing Vigenere Cipher\n`);
+
 inquirer
 	.prompt([
 		{
-			name: "cipherInput",
-			message: "Input a message to cipher",
-			type: "input",
-			validate: (input) => {
-				return new Promise((res, rej) => {
-					if (input?.length == 0) return rej(`Please input a valid message`);
-					res();
-				});
-			},
-		},
-		{
-			name: "keyInput",
-			message: "Input a key to use",
-			type: "input",
-			validate: (input) => {
-				return new Promise((res, rej) => {
-					if (input?.length == 0) return rej(`Please input a valid key`);
-					res();
-				});
-			},
+			name: "cipherOrDecipher",
+			message: "Would you like to cipher or decipher a message?",
+			type: "list",
+			choices: ["Cipher", "Decipher"],
 		},
 	])
 	.then((v) => {
-		result = encrypt(v.cipherInput, v.keyInput);
-		key = v.keyInput;
-		console.log(`Ciphered result: ${result}`);
+		switch (v.cipherOrDecipher) {
+			case "Cipher":
+				inquirer
+					.prompt([
+						{
+							name: "msg",
+							message: "Input a message to cipher:",
+							type: "input",
+							validate: (input) => validateStrings(input),
+						},
+						{
+							name: "key",
+							message: "Input a key to use:",
+							type: "input",
+							validate: (input) => validateStrings(null, input),
+						},
+					])
+					.then((v) => {
+						console.log(`Ciphered result: ${encrypt(v.msg, v.key)}`);
+					});
+
+				break;
+
+			case "Decipher":
+				inquirer
+					.prompt([
+						{
+							name: "msg",
+							message: "Input the ciphered message:",
+							type: "input",
+							validate: (input) => validateStrings(input),
+						},
+						{
+							name: "key",
+							message: "Input the key used to cipher the message:",
+							type: "input",
+							validate: (input) => validateStrings(null, input),
+						},
+					])
+					.then((v) => {
+						console.log(`Deciphered result: ${decrypt(v.msg, v.key)}`);
+					});
+				break;
+		}
 	});
 
 // console.log(encrypt("Hello World!", "dfw"));
