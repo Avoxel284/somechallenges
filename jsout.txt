@@ -1,0 +1,90 @@
+   -- Secondary iteration (1) :: x = 0
+   -! x mod sailors != 1, increment! (x=0)
+ -- Primary iteration :: coconuts = 1
+   -- Secondary iteration (1) :: x = 1
+   -- Secondary iteration (2) :: x = 0
+   -! x mod sailors != 1, increment! (x=0)
+ -- Primary iteration :: coconuts = 2
+   -- Secondary iteration (1) :: x = 2
+   -! x mod sailors != 1, increment! (x=2)
+ -- Primary iteration :: coconuts = 3
+   -- Secondary iteration (1) :: x = 3
+   -! x mod sailors != 1, increment! (x=3)
+ -- Primary iteration :: coconuts = 4
+   -- Secondary iteration (1) :: x = 4
+   -- Secondary iteration (2) :: x = 2
+   -! x mod sailors != 1, increment! (x=2)
+ -- Primary iteration :: coconuts = 5
+   -- Secondary iteration (1) :: x = 5
+   -! x mod sailors != 1, increment! (x=5)
+ -- Primary iteration :: coconuts = 6
+   -- Secondary iteration (1) :: x = 6
+   -! x mod sailors != 1, increment! (x=6)
+ -- Primary iteration :: coconuts = 7
+   -- Secondary iteration (1) :: x = 7
+   -- Secondary iteration (2) :: x = 4
+   -- Secondary iteration (3) :: x = 2
+   -! x mod sailors != 1, increment! (x=2)
+ -- Primary iteration :: coconuts = 8
+   -- Secondary iteration (1) :: x = 8
+   -! x mod sailors != 1, increment! (x=8)
+ -- Primary iteration :: coconuts = 9
+   -- Secondary iteration (1) :: x = 9
+   -! x mod sailors != 1, increment! (x=9)
+ -- Primary iteration :: coconuts = 10
+   -- Secondary iteration (1) :: x = 10
+   -- Secondary iteration (2) :: x = 6
+   -! x mod sailors != 1, increment! (x=6)
+ -- Primary iteration :: coconuts = 11
+   -- Secondary iteration (1) :: x = 11
+   -! x mod sailors != 1, increment! (x=11)
+ -- Primary iteration :: coconuts = 12
+   -- Secondary iteration (1) :: x = 12
+   -! x mod sailors != 1, increment! (x=12)
+ -- Primary iteration :: coconuts = 13
+   -- Secondary iteration (1) :: x = 13
+   -- Secondary iteration (2) :: x = 8
+   -! x mod sailors != 1, increment! (x=8)
+ -- Primary iteration :: coconuts = 14
+   -- Secondary iteration (1) :: x = 14
+   -! x mod sailors != 1, increment! (x=14)
+ -- Primary iteration :: coconuts = 15
+   -- Secondary iteration (1) :: x = 15
+   -! x mod sailors != 1, increment! (x=15)
+ -- Primary iteration :: coconuts = 16
+   -- Secondary iteration (1) :: x = 16
+   -- Secondary iteration (2) :: x = 10
+   -- Secondary iteration (3) :: x = 6
+   -! x mod sailors != 1, increment! (x=6)
+ -- Primary iteration :: coconuts = 17
+   -- Secondary iteration (1) :: x = 17
+   -! x mod sailors != 1, increment! (x=17)
+ -- Primary iteration :: coconuts = 18
+   -- Secondary iteration (1) :: x = 18
+   -! x mod sailors != 1, increment! (x=18)
+ -- Primary iteration :: coconuts = 19
+   -- Secondary iteration (1) :: x = 19
+   -- Secondary iteration (2) :: x = 12
+   -! x mod sailors != 1, increment! (x=12)
+ -- Primary iteration :: coconuts = 20
+   -- Secondary iteration (1) :: x = 20
+   -! x mod sailors != 1, increment! (x=20)
+ -- Primary iteration :: coconuts = 21
+   -- Secondary iteration (1) :: x = 21
+   -! x mod sailors != 1, increment! (x=21)
+ -- Primary iteration :: coconuts = 22
+   -- Secondary iteration (1) :: x = 22
+   -- Secondary iteration (2) :: x = 14
+   -! x mod sailors != 1, increment! (x=14)
+ -- Primary iteration :: coconuts = 23
+   -- Secondary iteration (1) :: x = 23
+   -! x mod sailors != 1, increment! (x=23)
+ -- Primary iteration :: coconuts = 24
+   -- Secondary iteration (1) :: x = 24
+   -! x mod sailors != 1, increment! (x=24)
+ -- Primary iteration :: coconuts = 25
+   -- Secondary iteration (1) :: x = 25
+   -- Secondary iteration (2) :: x = 16
+   -- Secondary iteration (3) :: x = 10
+almost there (true)
+omggggg 25

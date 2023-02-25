@@ -4,62 +4,64 @@
  * 2023 Oliver B (Avoxel284)
  */
 
+const inquirer = require("inquirer");
+
 /**
+ * Calculates the amount of coconuts in a pile if for N amount of given sailors, each sailor takes N/coconuts and
+ * gives 1 to the next door monkey. To do this, we mathematically brute force the amount of coconuts, working backwards.
+ * Returns the original amount of coconuts and how many the monkey gets.
+ *
  * @param {Number} sailors Number of sailors
  */
 function findCoconuts(sailors) {
-	// 				1,1 m = 1/2
-	// 				2,2 m = 2/2
-	// 				3,3 m =
-	// 				4,4
-	// 				5,5
-	// 				1,1
-	// 				1,1
-
-	// c = n because its the lowest even split, when none go to the monkey at the end.
 	let coconuts = 0;
-	let x = 0;
+	let monkeysCoconuts = 0;
 
-	while (x % sailors == 0) {
-		// console.log(`iterationio numero -- nuts : ${coconuts}`);
-		let x = coconuts;
-		for (let sailor = 1; sailor <= sailors; sailor++) {
-			x -= 1 + x / sailors;
-			console.log(x);
-			// console.log(coconuts % sailors);
-			// if (coconuts )
-			if (x % sailors != 1) coconuts++;
-			// else if (x != 0 && x % sailors == 0) coconuts++;
+	while (
+		// Continue incrementing coconuts until the following function is false
+		(() => {
+			{
+				let x = coconuts;
+				for (let sailor = 1; sailor <= sailors; sailor++) {
+					// If x mod sailors doesn't equal 1, we know it can't be our answer
+					// Thus, continue incrementing coconuts
+					if (x % sailors != 1) return true;
 
-			// console.log(`coconuts after sailor #${sailor}: ${coconuts} | ${coconuts % sailors != 1}`);
-		}
-		// coconuts++;
-		// console.log(coconuts);
-		// if (coconuts==0) coconuts++;
-		// if (!(coconuts != 0 && coconuts % sailors == 0)) coconuts++;
+					// Record how many coconuts the monkey gets
+					monkeysCoconuts++;
+
+					// Sailor takes their division, and 1 goes to the monkey
+					x -= Math.floor(x / sailors) + 1;
+				}
+
+				// If x doesn't equal 0 and x mod sailors equals 1, its our answer
+				return x != 0 && x % sailors == 1;
+			}
+		})()
+	) {
+		coconuts++;
 	}
 
-	return coconuts;
+	return [coconuts, monkeysCoconuts];
 }
 
-x = findCoconuts(5);
-console.log(x);
-console.log(`.... ${x == 3121 ? "!!!!!!!!!!! IS" : "not"} 3121 :(`);
-
-/**
- * @param {Number} n Amount of sailors
- * @param {Number} c Amount of coconuts
- */
-function takeCoconuts(n, c) {
-	let x = 0;
-	for (let i = 0; i < n; i++) {
-		// Sailor takes its even division
-		x = c / x;
-		// Sailor gives one to the monkey
-		x = x - 1;
-	}
-
-	return x;
-}
-
-// console.log(takeCoconuts(5, 1000));
+inquirer
+	.prompt([
+		{
+			name: "sailors",
+			type: "number",
+			message: "How many sailors would you like to calculate coconuts for?",
+			validate: (v) => {
+				if (v > 9 || v < 2) return `Amount of sailors must be below 9 and above 2`;
+				return true;
+			},
+		},
+	])
+	.then((v) => {
+		[c, m] = findCoconuts(v.sailors);
+		console.log(
+			`Coconuts originally in the pile: ${c} | Monkey gets ${m} coconuts and each sailor gets ${
+				(c - m) / v.sailors
+			} coconuts`
+		);
+	});

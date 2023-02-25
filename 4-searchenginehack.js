@@ -8,7 +8,7 @@
 const wordLength = 5;
 /** An array of pithy, one-liner sayings */
 const sayings = require("fs")
-	.readFileSync(__dirname + "/sayings.txt")
+	.readFileSync(__dirname + "/sayings-10.txt")
 	.toString()
 	.split("\n");
 
@@ -29,6 +29,8 @@ function reverseSearch(sayings) {
 		throw "Given sayings array isn't valid (empty or not an array)";
 
 	sayings.forEach((s) => {
+		// Make sure its a valid string
+		if (typeof s != "string" || s.length == 0) return;
 		// "Flatten" the saying into a lower case string with no spaces
 		s = s.toLowerCase().replace(/[^A-Z]/gi, "");
 		// console.log(s);
@@ -57,8 +59,7 @@ console.log(
 );
 console.log(
 	results
-		// .splice(0, 10)
-		.map((v, i) => `"${v[0]}" with ${v[1]}${i < 9 ? ", " : ""}`) // damn look at that attention to detail
+		.splice(0, 10)
+		.map((v, i, a) => `"${v[0]}" with ${v[1]}${i < a.length - 1 ? ", " : ""}`) // damn look at that attention to detail
 		.join("")
 );
-
