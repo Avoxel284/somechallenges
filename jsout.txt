@@ -1,0 +1,10 @@
+incrememnted: 1
+incrememnted: 2
+incrememnted: 3
+huh 0
+incrememnted: 4
+incrememnted: 5
+incrememnted: 6
+incrememnted: 7
+huh 1
+Coconuts originally in the pile: 7 | Monkey gets 6 coconuts and each sailor gets 0.5 coconuts

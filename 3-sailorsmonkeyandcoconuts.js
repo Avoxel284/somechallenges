@@ -4,7 +4,7 @@
  * 2023 Oliver B (Avoxel284)
  */
 
-const inquirer = require("inquirer");
+// const inquirer = require("inquirer");
 
 /**
  * Calculates the amount of coconuts in a pile if for N amount of given sailors, each sailor takes N/coconuts and
@@ -23,6 +23,7 @@ function findCoconuts(sailors) {
 			{
 				let x = coconuts;
 				for (let sailor = 1; sailor <= sailors; sailor++) {
+					console.log(sailor)
 					// If x mod sailors doesn't equal 1, we know it can't be our answer
 					// Thus, continue incrementing coconuts
 					if (x % sailors != 1) return true;
@@ -31,37 +32,48 @@ function findCoconuts(sailors) {
 					monkeysCoconuts++;
 
 					// Sailor takes their division, and 1 goes to the monkey
-					x -= Math.floor(x / sailors) + 1;
+					x -= 1 + Math.floor(x / sailors);
 				}
 
 				// If x doesn't equal 0 and x mod sailors equals 1, its our answer
+				console.log(`huh ${x}`)
 				return x != 0 && x % sailors == 1;
 			}
 		})()
 	) {
 		coconuts++;
+		console.log(`incrememnted: ${coconuts}`);
 	}
 
 	return [coconuts, monkeysCoconuts];
 }
 
-inquirer
-	.prompt([
-		{
-			name: "sailors",
-			type: "number",
-			message: "How many sailors would you like to calculate coconuts for?",
-			validate: (v) => {
-				if (v > 9 || v < 2) return `Amount of sailors must be below 9 and above 2`;
-				return true;
-			},
-		},
-	])
-	.then((v) => {
-		[c, m] = findCoconuts(v.sailors);
-		console.log(
-			`Coconuts originally in the pile: ${c} | Monkey gets ${m} coconuts and each sailor gets ${
-				(c - m) / v.sailors
-			} coconuts`
-		);
-	});
+// inquirer
+// 	.prompt([
+// 		{
+// 			name: "sailors",
+// 			type: "input",
+// 			message: "How many sailors would you like to calculate coconuts for?",
+// 			validate: (v) => {
+// 				return new Promise((res, rej) => {
+// 					if (!`${v}`.match(/^[2-9]$/g)) return rej(`Input must be a number and in the range 2-9.`);
+// 					res(true);
+// 				});
+// 			},
+// 		},
+// 	])
+// 	.then((v) => {
+// 		[c, m] = findCoconuts(v.sailors);
+// 		console.log(
+// 			`Coconuts originally in the pile: ${c} | Monkey gets ${m} coconuts and each sailor gets ${
+// 				(c - m) / v.sailors
+// 			} coconuts`
+// 		);
+// 	});
+
+[c, m] = findCoconuts(2);
+console.log(
+	`Coconuts originally in the pile: ${c} | Monkey gets ${m} coconuts and each sailor gets ${
+		(c - m) / 2
+	} coconuts`
+);

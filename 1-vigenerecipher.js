@@ -92,13 +92,14 @@ function decrypt(str, key) {
 function validateStrings(str, key) {
 	return new Promise((res, rej) => {
 		// Make sure our str and key is valid...
-		if ((str != null && str.length == 0) || (key != null && key.length == 0)) rej("Invalid input");
+		if ((str != null && str.length == 0) || (key != null && key.length == 0))
+			return rej("Invalid input");
 		if (str != null && !str.match(/^([A-Z]|\s|\.|!){1,}$/gi))
-			rej(
+			return rej(
 				"Message to cipher can only include characters from A-Z, spaces, exclamation marks and fullstops."
 			);
 		if (key != null && !key.match(/^[A-Z]{1,}$/gi))
-			rej("Key can only include characters from A-Z.");
+			return rej("Key can only include characters from A-Z.");
 		res(true);
 	});
 }
