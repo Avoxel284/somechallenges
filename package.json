@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Avoxel284/somechallenges#readme",
   "dependencies": {
-    "inquirer": "^8.2.4"
+    "inquirer": "8.2.5"
   }
 }
