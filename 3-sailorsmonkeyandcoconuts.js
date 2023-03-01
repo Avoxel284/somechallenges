@@ -7,6 +7,14 @@
 const inquirer = require("inquirer");
 
 /**
+ * 2:11
+ * 3:25
+ * 4:765
+ * 5:3121
+ * 6:46651
+ */
+
+/**
  * Calculates the amount of coconuts in a pile if for N amount of given sailors, each sailor takes N/coconuts and
  * gives 1 to the next door monkey. To do this, we mathematically brute force the amount of coconuts, working backwards.
  * Returns the original amount of coconuts and how many the monkey gets.
@@ -14,38 +22,53 @@ const inquirer = require("inquirer");
  * @param {Number} sailors Number of sailors
  */
 function findCoconuts(sailors) {
-	let coconuts = 0;
-	let monkeysCoconuts = 0;
+	let coconuts = sailors;
+	h = 0;
 
-	while (
-		// Continue incrementing coconuts until the following function is false
-		(() => {
-			{
-				let x = coconuts;
-				for (let sailor = 1; sailor <= sailors; sailor++) {
-					// console.log(sailor)
-					// If x mod sailors doesn't equal 1, we know it can't be our answer
-					// Thus, continue incrementing coconuts
-					if (x % sailors != 1) return true;
+	for (let d = 1; d <= sailors; d++) {
+		let x = coconuts;
+		for (let s = 1; s <= sailors; s++) {
+			x -= 1 + Math.floor(x / sailors);
+			console.log(`${d}/${s} :: ${x}`);
 
-					// Record how many coconuts the monkey gets
-					monkeysCoconuts++;
-
-					// Sailor takes their division, and 1 goes to the monkey
-					x -= 1 + Math.floor(x / sailors);
-				}
-
-				// If x doesn't equal 0 and x mod sailors equals 1, its our answer
-				// console.log(`huh ${x}`)
-				return x != 0 && x % sailors == 1;
+			if (x % sailors != 1) {
+				coconuts++;
+				continue;
 			}
-		})()
-	) {
-		coconuts++;
-		// console.log(`incrememnted: ${coconuts}`);
+		}
 	}
 
-	return [coconuts, monkeysCoconuts];
+	// function bruteforce() {
+	// 	let x = coconuts;
+	// 	console.log(`new iter ${x}`);
+	// 	for (let sailor = 1; sailor <= sailors; sailor++) {
+	// 		// console.log(sailor)
+	// 		// If x mod sailors doesn't equal 1, we know it can't be our answer
+	// 		// Thus, continue incrementing coconuts
+	// 		if (x % sailors != 1) {
+	// 			console.log(`whaa ${x} | ${x % sailors}`);
+	// 			return true;
+	// 		}
+
+	// 		// Sailor takes their division, and 1 goes to the monkey
+	// 		x -= 1 + Math.floor(x / sailors);
+	// 		console.log(`x: ${x}`);
+	// 		h = x;
+	// 	}
+
+	// 	// If x doesn't equal 0 and x mod sailors equals 1, its our answer
+	// 	console.log(`huh ${x}`)
+	// 	// return x == 0 && x % sailors != 0;
+	// }
+
+	// // Continue incrementing coconuts until the following function is false
+	// while (bruteforce()) {
+	// 	console.log(`add! ${coconuts}++`);
+	// 	coconuts++;
+	// }
+
+	console.log(h);
+	return [coconuts];
 }
 
 inquirer
@@ -71,9 +94,9 @@ inquirer
 		);
 	});
 
-// [c, m] = findCoconuts(2);
+// [c, m] = findCoconuts(5);
 // console.log(
 // 	`Coconuts originally in the pile: ${c} | Monkey gets ${m} coconuts and each sailor gets ${
-// 		(c - m) / 2
+// 		(c - m) / 5
 // 	} coconuts`
 // );

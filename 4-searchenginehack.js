@@ -33,7 +33,6 @@ function reverseSearch(sayings) {
 		if (typeof s != "string" || s.length == 0) return;
 		// "Flatten" the saying into a lower case string with no spaces
 		s = s.toLowerCase().replace(/[^A-Z]/gi, "");
-		// console.log(s);
 
 		// Extract "words" from sayings
 		for (let i = 0; i < s.length; i++) {
