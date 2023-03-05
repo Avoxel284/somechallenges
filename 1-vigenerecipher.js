@@ -71,7 +71,7 @@ function decrypt(str, key) {
 	if (str.length <= key.length) key = key.trim().substring(0, str.length);
 	else key = key.repeat(Math.ceil(str.length / key.length) + 1).substring(0, str.length);
 
-	console.log(`Deciphering: ${str} (${str.length}) with key: ${key} (${key.length})`);
+	// console.log(`Deciphering: ${str} (${str.length}) with key: ${key} (${key.length})`);
 
 	// Iterate through the str
 	for (i = 0; i < str.length; i++) {
