@@ -9,9 +9,7 @@ const inquirer = require("inquirer");
 /**
  * An array of uppercase letters from A-Z, procedurally generated
  */
-const alphabet = Array.from(Array(26))
-	.map((e, i) => i + 65)
-	.map((x) => String.fromCharCode(x));
+const alphabet = Array.from(Array(26)).map((e, i) => String.fromCharCode(i + 65));
 
 /**
  * Returns the index of a given letter in the alphabet

@@ -38,8 +38,6 @@ function findSemiprimes(min, max) {
 				b = i;
 			// If a & b are prime numbers themselves, append them to our results
 			if (checkIfPrime(a) && checkIfPrime(b) && !results.includes(n)) results.push(n);
-
-			// console.log(`${n} = ${a} x ${b}`);
 		}
 	}
 	return results;
