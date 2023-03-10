@@ -77,10 +77,7 @@ function decrypt(str, key) {
 		if (str[i].match(/^[A-Z]$/)) {
 			// Repeat the alphabet array so it "wraps around"
 			// Then, subtract the indexes of str[i] and key[i], but add 26 so it shifts back
-			// Finally, append it to the result
-
-			console.log(str[i], letterToIndex(str[i]), key[i], letterToIndex(key[i]));
-
+			// ..And finally, append it to the result
 			result += [...alphabet, ...alphabet][letterToIndex(str[i]) - letterToIndex(key[i]) + 26];
 		}
 		// If the character is a symbol, don't decipher it

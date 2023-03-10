@@ -23,6 +23,7 @@ function checkIfPrime(n) {
 
 /**
  * Finds the semiprimes between a given minimum and maximum.
+ * To do this, it gets the two factors of every number in the given range and checks if they're both prime.
  *
  * @param {Number} min
  * @param {Number} max
